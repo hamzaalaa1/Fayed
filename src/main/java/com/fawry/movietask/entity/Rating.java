@@ -1,5 +1,7 @@
 package com.fawry.movietask.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,11 +14,12 @@ public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @JsonProperty("Source")
     private String source;
-    private String value;
+    @JsonProperty("Value")
+    private String ratingValue;
 
     @ManyToOne
-    @JoinColumn(name = "movie_id") // FK column in rating table
+    @JoinColumn(name = "movie_id")
     private MoiveEntity movie;
 }
