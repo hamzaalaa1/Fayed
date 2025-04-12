@@ -1,20 +1,11 @@
-package com.fawry.movietask.entity;
+package com.fawry.movietask.dto;
 
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.List;
 
-@Entity
-@Setter
-@Getter
-@Table(name = "movie")
-public class MoiveEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+@Data
+public class MovieDto {
     private String title;
     private String year;
     private String rated;
@@ -29,8 +20,7 @@ public class MoiveEntity {
     private String country;
     private String awards;
     private String poster;
-    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Rating> ratings;
+    private List<RatingDto> ratings;
     private String metascore;
     private String imdbRating;
     private String imdbVotes;
