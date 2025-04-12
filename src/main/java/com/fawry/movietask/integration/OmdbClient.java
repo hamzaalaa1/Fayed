@@ -10,3 +10,6 @@ public interface  OmdbClient {
     @GetMapping("/")
     MovieDto getPostById(@RequestParam("i") String movieId, @RequestParam("apikey") String token);
 }
+//https://www.omdbapi.com/?i=movieId&apikey=token
+//http://www.omdbapi.com/?i=tt3896198&apikey=9c31d025
+//libs code generation

@@ -1,6 +1,5 @@
 package com.fawry.movietask.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -21,5 +20,5 @@ public class Rating {
 
     @ManyToOne
     @JoinColumn(name = "movie_id")
-    private MoiveEntity movie;
+    private MovieEntity movie;
 }

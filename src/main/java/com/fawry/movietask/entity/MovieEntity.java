@@ -1,11 +1,8 @@
 package com.fawry.movietask.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fawry.movietask.dto.RatingDto;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,11 +13,10 @@ import java.util.List;
 @Getter
 @Table(name = "movie")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class MoiveEntity  {
+public class MovieEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @JsonProperty("Title")
     private String title;
     @JsonProperty("Year")

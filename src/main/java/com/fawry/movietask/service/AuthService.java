@@ -55,8 +55,7 @@ public class AuthService {
         }
     }
     private String generateToken(LoginRequestDto loginRequestDto) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("username",loginRequestDto.getUsername());
+        Map<String, Object> claims = getClaims(loginRequestDto);
         return jwtService.generateToken(loginRequestDto.getUsername(),claims);
     }
     private User createUserEntity(UserRegisterRequestDto userRegisterRequestDto) {
@@ -66,4 +65,17 @@ public class AuthService {
         user.setGender(userRegisterRequestDto.getEmail());
         return user;
     }
+
+    private Map<String,Object> getClaims(LoginRequestDto loginRequestDto) {
+        Map<String,Object> claims = new HashMap<>();
+        claims.put("username",loginRequestDto.getUsername());
+        claims.put("password",loginRequestDto.getPassword());
+        if(loginRequestDto.getUsername().equals("admin")&&loginRequestDto.getPassword().equals("123")){
+            claims.put("userType","admin");
+        }else{
+            claims.put("userType","user");
+        }
+        return claims;
+    }
+
 }
