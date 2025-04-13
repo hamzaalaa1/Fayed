@@ -50,6 +50,6 @@ public class JwtService {
                 .parseClaimsJws(token);
     }
     public String extractClaimsByKey(String key,String token){
-       return Jwts.parserBuilder().build().parseClaimsJws(token).getBody().get(key,String.class);
+       return Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token).getBody().get(key,String.class);
     }
 }
