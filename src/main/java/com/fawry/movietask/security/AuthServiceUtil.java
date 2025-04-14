@@ -21,9 +21,11 @@ public class AuthServiceUtil {
     @Autowired
     private JwtService jwtService;
 
-    private List<String> whiteListedActions = Arrays.asList("^/api/auth/login$", "^/api/auth/register$");
+    private List<String> whiteListedActions = Arrays.asList("^/api/auth/login$", "^/api/auth/register$","^/api/h2-console/.*");
 
     private Map<String, List<String>> allowedActions = new HashMap<>();
+    @Autowired
+    private ServletResponse servletResponse;
 
 
     public AuthServiceUtil() {
@@ -31,16 +33,17 @@ public class AuthServiceUtil {
         allowedActions.put("USER", Arrays.asList("^/api/user/.*"));
     }
 
-    public String extractTokenFromRequest(ServletRequest request) {
+    public String extractTokenFromRequest(ServletRequest request,ServletResponse servletResponse) {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String bearerToke = httpServletRequest.getHeader("Authorization");
-        validateAuthHeader(bearerToke);
+        validateAuthHeader(bearerToke,servletResponse);
         return getAccessToken(bearerToke);
     }
 
-    private void validateAuthHeader(String bearerToke) {
+    private void validateAuthHeader(String bearerToke,ServletResponse servletResponse) {
         if (bearerToke == null || bearerToke.isBlank() || bearerToke.isEmpty()) {
-            throw new FeignException.Unauthorized("forbidden", null, null, null);
+            //throw new FeignException.Unauthorized("forbidden", null, null, null);
+            perpaierForbiddenResponse((HttpServletResponse) servletResponse);
         }
     }
 

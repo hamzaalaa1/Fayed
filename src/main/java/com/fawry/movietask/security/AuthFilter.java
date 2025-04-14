@@ -23,7 +23,7 @@ public class AuthFilter implements Filter {
             return ;
         }
         try {
-            String token = authServiceUtil.extractTokenFromRequest(servletRequest);
+            String token = authServiceUtil.extractTokenFromRequest(servletRequest,servletResponse);
             jwtService.isTokenValid(token);
             String userType = jwtService.extractClaimsByKey("userType",token);
             authServiceUtil.isUserAllowed(userType,userAction,servletResponse);
